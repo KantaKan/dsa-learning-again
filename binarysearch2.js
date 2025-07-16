@@ -15,3 +15,13 @@ function binarySearch(arr, val) {
   }
   return -1;
 }
+
+function betterBinarySearch(arr, val) {
+  let [min, max] = [0, arr.length - 1];
+  while (min <= max) {
+    const mid = Math.floor((min + max) / 2);
+    if (arr[mid] === val) return mid;
+    arr[mid] < val ? (min = mid + 1) : (max = mid - 1);
+  }
+  return -1;
+}
