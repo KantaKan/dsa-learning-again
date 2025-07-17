@@ -20,3 +20,4 @@ function validAnagram(first, second) {
 
   return true;
 }
+//this will count whitespace too
