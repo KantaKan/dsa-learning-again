@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insertion Sort Visualizer</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #111;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+      }
+      #bars {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        height: 300px;
+        margin-top: 30px;
+        gap: 5px;
+      }
+      .bar {
+        width: 30px;
+        background: #4fc3f7;
+        transition: all 0.3s ease;
+      }
+      .bar.active {
+        background: #ff4081;
+      }
+      .bar.sorted {
+        background: #81c784;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Insertion Sort Visualizer</h1>
+    <button onclick="startSort()">Start Sorting</button>
+    <div id="bars"></div>
+
+    <script>
+      const array = [5, 2, 4, 6, 1, 3];
+      const delay = 500; // milliseconds
+
+      const barsContainer = document.getElementById("bars");
+
+      function renderBars(arr, highlight = -1, sortedIndex = -1) {
+        barsContainer.innerHTML = "";
+        arr.forEach((value, i) => {
+          const bar = document.createElement("div");
+          bar.classList.add("bar");
+          bar.style.height = `${value * 40}px`;
+          if (i === highlight) bar.classList.add("active");
+          if (i <= sortedIndex) bar.classList.add("sorted");
+          barsContainer.appendChild(bar);
+        });
+      }
+
+      async function startSort() {
+        let arr = [...array];
+        renderBars(arr);
+
+        for (let i = 1; i < arr.length; i++) {
+          let current = arr[i];
+          let j = i - 1;
+          console.log(`\n📦 i=${i}, current=${current}`);
+
+          while (j >= 0 && arr[j] > current) {
+            console.log(`  ↪️ arr[${j}] (${arr[j]}) > current (${current}) → shift`);
+            arr[j + 1] = arr[j];
+            j--;
+
+            renderBars(arr, j + 1, i);
+            await new Promise((r) => setTimeout(r, delay));
+          }
+
+          console.log(`✅ insert current (${current}) at position ${j + 1}`);
+          arr[j + 1] = current;
+
+          renderBars(arr, j + 1, i);
+          await new Promise((r) => setTimeout(r, delay));
+        }
+
+        renderBars(arr, -1, arr.length);
+        console.log("\n🎉 Final Sorted Array:", arr);
+      }
+
+      // Render initially
+      renderBars(array);
+    </script>
+  </body>
+</html>
