@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const members1 = JSON.parse(fs.readFileSync("data.json", "utf-8"));
-
+const member2 = await fetch("");
 async function deleteAllMembers(members) {
   for (const member of members) {
     try {
@@ -23,7 +23,7 @@ async function deleteAllMembers(members) {
     }
   }
 
-  console.log("🎉 ลบทั้งหมดเสร็จแล้ว!");
+  console.log("done");
 }
 
 deleteAllMembers(members1);

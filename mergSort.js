@@ -1,4 +1,4 @@
-function merge(arr1, arr2) {
+function merg(arr1, arr2) {
   let result = [];
   let i = 0;
   let j = 0;
@@ -21,4 +21,12 @@ function merge(arr1, arr2) {
     j++;
   }
   return result;
+}
+
+function mergSort(arr) {
+  if (arr.length <= 1) return arr;
+  let mid = Math.floor(arr.length / 2);
+  let left = mergSort(arr.slice(0, mid));
+  let right = mergSort(arr.slice(mid));
+  return merg(left, right);
 }
