@@ -5,8 +5,6 @@ class Node {
   }
 }
 
-var first = new Node("hi");
-
 class SinglyLinkedList {
   constructor() {
     this.length = 0;
@@ -44,5 +42,18 @@ class SinglyLinkedList {
       this.tail = null;
     }
     return current;
+  }
+
+  shift() {
+    if (!this.head) {
+      return undefined;
+    }
+    let first = this.head;
+    this.head = this.head.next;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return first;
   }
 }
